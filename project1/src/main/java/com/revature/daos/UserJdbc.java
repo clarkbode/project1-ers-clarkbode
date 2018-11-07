@@ -1,8 +1,6 @@
 package com.revature.daos;
 
 
-
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +10,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.revature.model.Reimbursement;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtil;
 
@@ -22,7 +21,7 @@ public class UserJdbc implements UserDao{
 	public User findById(int id) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			log.debug("finding user with the id " + id);
-			Statement s = conn.createStatement();
+			Statement s = conn.createStatement(); //should use prepared statement instead
 			ResultSet rs = s.executeQuery( //SQL query goes here. THIS IS BLAKE'S QUERY FROM THE DEMO, NEED TO REPLACE WITH MY OWN
 						// my Query should create a join of ers_users and ers_reimbursements on the ers_users_id column
 					"SELECT user_id, fruit_id, u.name as user_name, f.name as fruit_name, " + 
@@ -39,23 +38,28 @@ public class UserJdbc implements UserDao{
 						rs.getString("user_first_name"), rs.getString("user_last_name"), rs.getString("user_email"), 
 						rs.getInt("user_role_id"));
 				
-				//Everything below this line is ripped and needs to be replaced. -----------------------------
-				
-				do {
-//					u.getFavoriteFruits().add(new Fruit(rs.getInt("fruit_id"), rs.getString("fruit_name"),
-//								rs.getString("color"), rs.getInt("flavorrating")));
-				} while (rs.next());
-
-				return u;
-			} else {
-				log.debug("no users found with the id " +id);
-			}
+				}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+
+	@Override
+	public Reimbursement addReimbursement(User u) { //maybe it makes more sense for this return a reimb?
+		// should create a new reimb with user-defined values
+		return null;
+	}
+
+	@Override
+	public Reimbursement resolveReimbursement(Reimbursement reimb) {
+		// should change an existing reimb's reimb_resolved column to 2
+		return null;
+	}
+	
+	
 	
 
 }
