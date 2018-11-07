@@ -1,5 +1,7 @@
 package com.revature.model;
 
+import java.util.List;
+
 public class User {
 	
 	private int user_id;
@@ -9,6 +11,8 @@ public class User {
 	private String lastName;
 	private String email; //I THINK this converts properly?
 	private int role_id;
+	
+	private List<Reimbursement> activeReimbs;
 	
 	public User() {
 		super();
@@ -84,6 +88,18 @@ public class User {
 
 	public void setRole_id(int role_id) {
 		this.role_id = role_id;
+	}
+
+
+
+	public List<Reimbursement> getActiveReimbs() {
+		return activeReimbs;
+	}
+
+
+
+	public void setActiveReimbs(List<Reimbursement> activeReimbs) {
+		this.activeReimbs = activeReimbs;
 	}
 	
 	
