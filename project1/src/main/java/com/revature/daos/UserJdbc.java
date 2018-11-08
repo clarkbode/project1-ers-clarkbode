@@ -2,6 +2,7 @@ package com.revature.daos;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,7 @@ public class UserJdbc implements UserDao{
 	
 	private Logger log = Logger.getRootLogger(); //for some reason getRootLogger() doesn't exist
 
+	@Override
 	public User findById(int id) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			log.debug("finding user with the id " + id);
@@ -48,18 +50,9 @@ public class UserJdbc implements UserDao{
 	}
 
 	@Override
-	public Reimbursement addReimbursement(User u) { //maybe it makes more sense for this return a reimb?
-		// should create a new reimb with user-defined values
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public Reimbursement resolveReimbursement(Reimbursement reimb) {
-		// should change an existing reimb's reimb_resolved column to 2
-		return null;
-	}
-	
-	
-	
 
 }
