@@ -1,5 +1,7 @@
 package com.revature.daos;
 
+import java.util.List;
+
 import com.revature.model.Reimbursement;
 import com.revature.model.User;
 
@@ -9,5 +11,8 @@ public interface ReimbursementDao {
 	int addReimbursement(User u, Reimbursement newReimb);
 	
 	Reimbursement resolveReimbursement(Reimbursement reimb, User u);
+	
+	List<Reimbursement> findAll();
+	//List<Reimbursement> findAllByRole(String role);  //Change this to findAllByStatus(int status);
 
 }

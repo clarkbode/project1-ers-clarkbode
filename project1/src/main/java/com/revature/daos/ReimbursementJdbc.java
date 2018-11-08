@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.model.Reimbursement;
 import com.revature.model.User;
@@ -39,7 +41,7 @@ public class ReimbursementJdbc implements ReimbursementDao{
 			}
 			
 		} catch (SQLException e) {
-			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("DERP");
 		}
 		
@@ -49,13 +51,35 @@ public class ReimbursementJdbc implements ReimbursementDao{
 	@Override
 	public Reimbursement resolveReimbursement(Reimbursement reimb, User u) {
 		try (Connection conn = ConnectionUtil.getConnection()){
-			PreparedStatement ps = conn.prepareStatement(""); //UPDATE function
+			PreparedStatement ps = conn.prepareStatement(
+					"UPDATE ers_reimbursement\r\n" + 
+					"SET reimb_status_id = 2, reimb_resolved = ?, reimb_resolver = ?\r\n" + 
+					"WHERE reimb_id =" + reimb.getReimb_id()); //is this correct? Check with Blake
+			
+			ps.setInt(1, 2);
+			ps.setInt(1, u.getUser_id());
+			
 			
 		} catch (SQLException e) {
-			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("DERP");
 		}
 		
+		return null;
+	}
+
+	@Override
+	public List<Reimbursement> findAll() {
+		try (Connection conn = ConnectionUtil.getConnection()){
+			PreparedStatement ps = conn.prepareStatement(""); //SQL statement to find all the reimbursements
+			
+			//loop to populate a list with the items found in the ps.
+			List<Reimbursement> reimbs = new ArrayList<>();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("DERP");
+		}
 		return null;
 	}
 
