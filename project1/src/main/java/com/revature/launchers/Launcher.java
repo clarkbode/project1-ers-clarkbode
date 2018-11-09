@@ -15,7 +15,9 @@ public class Launcher {
 ////		System.out.println(fd.save(new Fruit(0, "Papaya", "orangeish", 3)));
 //
 //		System.out.println(rd.findByName("papaya"));
+		System.out.println("TESTING!");
 		
-		
+		//System.out.println(rd.findAll());
+		System.out.println(ud.findAll());
 	}
 }

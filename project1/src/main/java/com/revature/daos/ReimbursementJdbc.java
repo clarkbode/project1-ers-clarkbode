@@ -1,5 +1,6 @@
 package com.revature.daos;
 
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,11 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.revature.model.Reimbursement;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtil;
 
 public class ReimbursementJdbc implements ReimbursementDao{
+	private Reimbursement extractFromResultSet(ResultSet rs) throws SQLException {
+		return new Reimbursement(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), rs.getTimestamp("reimb_resolved"),
+				rs.getString("reimb_description"), rs.getString("reimb_receipt"), rs.getInt("reimb_author"), rs.getInt("reimb_resolver"),
+				rs.getInt("reimb_status_id"), rs.getInt("reimb_type_id"));
+	}
 
 	@Override
 	public int addReimbursement(User u, Reimbursement newReimb) { //QUESTION: In Blake's example, this returns int. Would it be better to return a reimbursement?
@@ -21,6 +28,7 @@ public class ReimbursementJdbc implements ReimbursementDao{
 					"	reimb_id, reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_receipt, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)\r\n" + 
 					"	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
 					);
+			
 			ps.setInt(1, newReimb.getReimb_id());
 			ps.setDouble(2, newReimb.getReimb_amount());
 			ps.setTimestamp(3, newReimb.getReimb_submitted());
@@ -28,8 +36,9 @@ public class ReimbursementJdbc implements ReimbursementDao{
 			ps.setString(5, newReimb.getReimb_description());
 			ps.setString(6, newReimb.getReimb_receipt());
 			ps.setInt(7,  newReimb.getReimb_author());
-			ps.setInt(8, newReimb.getReimb_status_id());
-			ps.setInt(9, newReimb.getReimb_type_id());
+			ps.setInt(8, newReimb.getReimb_resolver());
+			ps.setInt(9, newReimb.getReimb_status_id());
+			ps.setInt(10, newReimb.getReimb_type_id());
 			
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
@@ -71,14 +80,19 @@ public class ReimbursementJdbc implements ReimbursementDao{
 	@Override
 	public List<Reimbursement> findAll() {
 		try (Connection conn = ConnectionUtil.getConnection()){
-			PreparedStatement ps = conn.prepareStatement(""); //SQL statement to find all the reimbursements
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ers_reimbursement"); //SQL statement to find all the reimbursements
+			ResultSet rs = ps.executeQuery();
 			
 			//loop to populate a list with the items found in the ps.
 			List<Reimbursement> reimbs = new ArrayList<>();
+			while (rs.next()) {
+				reimbs.add(extractFromResultSet(rs));
+			}
+			return reimbs;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("DERP");
+			System.out.println("DERP FINDALL");
 		}
 		return null;
 	}

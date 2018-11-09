@@ -17,6 +17,14 @@ import com.revature.util.ConnectionUtil;
 
 public class UserJdbc implements UserDao{
 	
+	private User extractFromResultSet(ResultSet rs) throws SQLException {
+		return new User(
+				rs.getInt("ers_users_id"), rs.getString("ers_username"), rs.getString("ers_password"),
+				rs.getString("user_first_name"), rs.getString("user_last_name"), rs.getString("user_email"),
+				rs.getInt("user_role_id")
+				);
+	}
+	
 	private Logger log = Logger.getRootLogger(); //for some reason getRootLogger() doesn't exist
 
 	@Override
@@ -51,8 +59,26 @@ public class UserJdbc implements UserDao{
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
+		try (Connection conn = ConnectionUtil.getConnection()){
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ers_users"); //SQL statement to find all the reimbursements
+			ResultSet rs = ps.executeQuery();
+			
+			//loop to populate a list with the items found in the ps.
+			List<User> users = new ArrayList<>();
+			while (rs.next()) {
+				users.add(extractFromResultSet(rs));
+			}
+			return users;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("DERP FINDALL USERS");
+		}
 		return null;
 	}
 
-}
+
+
+	}
+
+
