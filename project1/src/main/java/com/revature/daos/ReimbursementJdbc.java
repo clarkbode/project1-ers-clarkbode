@@ -1,6 +1,5 @@
 package com.revature.daos;
 
-import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +50,7 @@ public class ReimbursementJdbc implements ReimbursementDao{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("DERP");
+			System.out.println("DERP ADD REIMBURSEMENT");
 		}
 		
 		return 0;
@@ -71,7 +70,7 @@ public class ReimbursementJdbc implements ReimbursementDao{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("DERP");
+			System.out.println("DERP RESOLVEREIMBURSEMENT");
 		}
 		
 		return null;
@@ -92,9 +91,33 @@ public class ReimbursementJdbc implements ReimbursementDao{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("DERP FINDALL");
+			System.out.println("DERP FINDALL REIMBURSEMENTS");
 		}
 		return null;
 	}
+
+	@Override
+	public List<Reimbursement> findAllByStatus(int status, Reimbursement newReimb) {
+		try (Connection conn = ConnectionUtil.getConnection()){
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ers_reimbursement WHERE reimb_status id = ?"); //SQL statement to find all the reimbursements
+			ResultSet rs = ps.executeQuery();
+			
+			ps.setInt(1, newReimb.getReimb_status_id());
+			
+			//loop to populate a list with the items found in the ps.
+			List<Reimbursement> reimbs = new ArrayList<>();
+			while (rs.next()) {
+				reimbs.add(extractFromResultSet(rs));
+			}
+			return reimbs;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("DERP FINDALLBYSTATUS");
+		}
+		return null;
+	}
+
+
 
 }

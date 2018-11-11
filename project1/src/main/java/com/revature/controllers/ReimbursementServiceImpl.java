@@ -15,4 +15,10 @@ private ReimbursementDao rd = ReimbursementDao.currentImplementation;
 		return rd.findAll();
 	}
 
+	@Override
+	public List<Reimbursement> findAllByStatus(int status, Reimbursement reimb) {
+		
+		return rd.findAllByStatus(status, reimb);
+	}
+
 }

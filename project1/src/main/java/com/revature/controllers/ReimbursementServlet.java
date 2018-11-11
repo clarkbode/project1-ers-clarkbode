@@ -38,10 +38,10 @@ public class ReimbursementServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("Getting requests...");
 		
-		List<Reimbursement> l = rs.findAll();
-		
+		List<Reimbursement> lFindAll = rs.findAll();
+		//List<Reimbursement> lFindAllByStatus = rs.findAllByStatus(status, reimb); //need to implement this with URI parsing. Will have to ask Blake
 		ObjectMapper om = new ObjectMapper();
-		String json = om.writeValueAsString(l);
+		String json = om.writeValueAsString(lFindAll);
 		resp.getWriter().write(json);
 	}
 }

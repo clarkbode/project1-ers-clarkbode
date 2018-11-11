@@ -8,4 +8,6 @@ public interface ReimbursementService {
 	ReimbursementService currentImplementation = new ReimbursementServiceImpl();
 
 	List<Reimbursement> findAll();
+	
+	List<Reimbursement> findAllByStatus(int status, Reimbursement reimb);
 }
