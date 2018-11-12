@@ -97,12 +97,12 @@ public class ReimbursementJdbc implements ReimbursementDao{
 	}
 
 	@Override
-	public List<Reimbursement> findAllByStatus(int status, Reimbursement newReimb) {
+	public List<Reimbursement> findAllByStatus(int status) {
 		try (Connection conn = ConnectionUtil.getConnection()){
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ers_reimbursement WHERE reimb_status id = ?"); //SQL statement to find all the reimbursements
 			ResultSet rs = ps.executeQuery();
 			
-			ps.setInt(1, newReimb.getReimb_status_id());
+			ps.setInt(1, status);
 			
 			//loop to populate a list with the items found in the ps.
 			List<Reimbursement> reimbs = new ArrayList<>();

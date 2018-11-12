@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Reimbursement;
+import com.revature.services.ReimbursementService;
 
 public class ReimbursementServlet extends HttpServlet{
 
@@ -39,7 +40,7 @@ public class ReimbursementServlet extends HttpServlet{
 		System.out.println("Getting requests...");
 		
 		List<Reimbursement> lFindAll = rs.findAll();
-		//List<Reimbursement> lFindAllByStatus = rs.findAllByStatus(status, reimb); //need to implement this with URI parsing. Will have to ask Blake
+		//List<Reimbursement> lFindAllByStatus = rs.findAllByStatus(status); //need to implement this with URI parsing. Blake says this is one in the controllers
 		ObjectMapper om = new ObjectMapper();
 		String json = om.writeValueAsString(lFindAll);
 		resp.getWriter().write(json);

@@ -1,4 +1,4 @@
-package com.revature.controllers;
+package com.revature.services;
 
 import java.util.List;
 
@@ -15,10 +15,11 @@ private ReimbursementDao rd = ReimbursementDao.currentImplementation;
 		return rd.findAll();
 	}
 
+
 	@Override
-	public List<Reimbursement> findAllByStatus(int status, Reimbursement reimb) {
-		
-		return rd.findAllByStatus(status, reimb);
+	public List<Reimbursement> findAllByStatus(int status) {
+		// TODO Auto-generated method stub
+		return rd.findAllByStatus(status);
 	}
 
 }

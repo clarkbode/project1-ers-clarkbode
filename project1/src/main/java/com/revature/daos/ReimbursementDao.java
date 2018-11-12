@@ -13,6 +13,6 @@ public interface ReimbursementDao {
 	Reimbursement resolveReimbursement(Reimbursement reimb, User u);
 	
 	List<Reimbursement> findAll();
-	List<Reimbursement> findAllByStatus(int status, Reimbursement newReimb);  
+	List<Reimbursement> findAllByStatus(int status);  
 
 }

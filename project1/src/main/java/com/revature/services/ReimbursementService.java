@@ -1,4 +1,4 @@
-package com.revature.controllers;
+package com.revature.services;
 
 import java.util.List;
 import com.revature.model.*;
@@ -9,5 +9,5 @@ public interface ReimbursementService {
 
 	List<Reimbursement> findAll();
 	
-	List<Reimbursement> findAllByStatus(int status, Reimbursement reimb);
+	List<Reimbursement> findAllByStatus(int status);
 }

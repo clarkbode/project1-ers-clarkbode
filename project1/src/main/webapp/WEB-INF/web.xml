@@ -6,21 +6,25 @@ version="2.5">
   <display-name>project1</display-name>
 
 	<servlet>
-		<servlet-name>ReimbursementServlet</servlet-name>
-		<servlet-class>com.revature.controllers.ReimbursementServlet</servlet-class>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>com.revature.controllers.DispatcherServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ReimbursementServlet</servlet-name>
-		<url-pattern>/Reimbursements</url-pattern>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>ReimbursementServlet</servlet-name> -->
+<!-- 		<url-pattern>/Reimbursements/*</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 	
-		<servlet>
-		<servlet-name>UserServlet</servlet-name>
-		<servlet-class>com.revature.controllers.UserServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserServlet</servlet-name>
-		<url-pattern>/Users</url-pattern>
-	</servlet-mapping>
+<!-- 		<servlet> -->
+<!-- 		<servlet-name>UserServlet</servlet-name> -->
+<!-- 		<servlet-class>com.revature.controllers.UserServlet</servlet-class> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>UserServlet</servlet-name> -->
+<!-- 		<url-pattern>/Users/*</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 	
 </web-app>

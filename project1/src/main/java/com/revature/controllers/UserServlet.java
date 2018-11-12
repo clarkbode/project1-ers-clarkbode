@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Reimbursement;
 import com.revature.model.User;
+import com.revature.services.UserService;
 
 public class UserServlet extends HttpServlet{
 
