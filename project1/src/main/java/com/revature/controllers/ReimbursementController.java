@@ -54,24 +54,33 @@ public class ReimbursementController {
 		String[] uriArray = uri.split("/");
 		System.out.println(Arrays.toString(uriArray));
 
-		if (uriArray.length == 1) {
+		if (uriArray.length == 1) { //reimbursement/
 			System.out.println("Retrieving all Reimbursements");
 			List<Reimbursement> reimbs = rs.findAll();
 			ResponseMapper.convertAndAttach(reimbs, resp);
 			return;
 
-		} else if (uriArray.length == 2) {
+		} else if (uriArray.length == 2) { //reimbursement/<id>
 			int id = Integer.parseInt(uriArray[1]);
 			log.info("Retrieving Reimbursement with id: " + id);
 			// Reimbursement reimb = rs.findById(id); //This method isn't part of the
 			// requirements. Is there a problem leaving it empty?
-		} else if (uriArray.length == 3 && uriArray[1].equals("status")) {
+		} else if (uriArray.length == 3 && uriArray[1].equals("status")) { //reimbursement/status/<statusid#>
 			// String status = uriArray[2];
 			int status = Integer.parseInt(uriArray[2]); // if there's a way to make this a string easily, I may want to
 														// change it back. Ask blake.
-			log.info("finding all champions with role: " + status);
+			log.info("finding all reimbursements by status: " + status);
 			List<Reimbursement> reimbs = rs.findAllByStatus(status);
-			ResponseMapper.convertAndAttach(status, resp);
+			ResponseMapper.convertAndAttach(reimbs, resp);
+			return;
+		}
+		else if (uriArray.length == 3 && uriArray[1].equals("resolve")) { //reimbursement/resolve/<UserId>/<reimbId>/<newStatusId>
+			int userId = Integer.parseInt(uriArray[2]);
+			int reimbId = Integer.parseInt(uriArray[3]);
+			int newStatusId = Integer.parseInt(uriArray[4]);
+			log.info("User " + userId + " Setting reimbursement status to: " + newStatusId);
+			rs.resolveReimbursement(reimbId, userId, newStatusId);
+			//I don't need any return data, since the action should just be taken
 			return;
 		}
 	}
@@ -92,7 +101,7 @@ public class ReimbursementController {
 				resp.setStatus(403);
 				return;
 			} else {
-				log.info("saving new champion");
+				log.info("saving new reimbursement");
 				Reimbursement r = om.readValue(req.getReader(), Reimbursement.class);
 				// rs.AddReimbursement(r); (NEEDS TO BE IMPLEMENTED
 				resp.getWriter().write("" + r.getReimb_id());

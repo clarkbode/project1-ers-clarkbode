@@ -10,4 +10,6 @@ public interface UserService {
 	UserService currentImplementation = new UserServiceImpl();
 
 	List<User> findAll();
+	
+	User findById(int id);
 }

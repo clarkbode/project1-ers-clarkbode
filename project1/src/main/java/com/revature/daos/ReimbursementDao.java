@@ -10,7 +10,7 @@ public interface ReimbursementDao {
 	
 	int addReimbursement(User u, Reimbursement newReimb);
 	
-	Reimbursement resolveReimbursement(Reimbursement reimb, User u);
+	void resolveReimbursement(int reimbId, int userId, int newStatusId);
 	
 	List<Reimbursement> findAll();
 	List<Reimbursement> findAllByStatus(int status);  

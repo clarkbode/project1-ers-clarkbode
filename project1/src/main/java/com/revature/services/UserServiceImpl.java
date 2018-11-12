@@ -15,4 +15,10 @@ public class UserServiceImpl implements UserService{
 		return ud.findAll();
 	}
 
+	@Override
+	public User findById(int id) {
+		// TODO Auto-generated method stub
+		return ud.findById(id);
+	}
+
 }
