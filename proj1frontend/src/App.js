@@ -10,6 +10,10 @@ import { homeComponent } from './Components/homeComponent';
 import {viewReimbursementComponent} from './Components/viewReimbursementComponent';
 import {viewMyReimbursementComponent} from './Components/viewMyReimbursementComponent';
 import {signInComponent} from './Components/signInComponent';
+import { viewReimbursementByIdComponent } from './Components/viewReimbursementByIdComponent';
+import { viewReimbursementByStatusComponent } from './Components/viewReimbursementByStatusComponent';
+import { viewReimbursementByAuthorComponent } from './Components/viewReimbursementByAuthorComponent';
+import { ReimbursementTableComponent } from './Components/ReimbursementTableComponent';
 
 
 class App extends Component {
@@ -23,9 +27,14 @@ class App extends Component {
             <Route path="/home" component={homeComponent} />
             <Route path="/sign-in" component={signInComponent} />
             <Route path="/newReimb" component={newReimbursementComponent} />
-            <Route path="/viewReimb" component={viewReimbursementComponent} />
+            {/* <Route path="/viewReimb" component={viewReimbursementComponent} /> */}
+            <Route path="/viewReimb" component={ReimbursementTableComponent} /> {/*This is for testing. Remember to change this back later */}
             <Route path="/myReimb" component={viewMyReimbursementComponent} /> 
-            {/* /myReimb does not have a navbar listing because it will be accessed within the viewReimb page */}
+            <Route path="/idReimb" component={viewReimbursementByIdComponent} />
+            <Route path="/statusReimb" component={viewReimbursementByStatusComponent} />
+            <Route path="/authorReimb" component={viewMyReimbursementComponent} />
+            {/* /myReimb, /idReimb, /statusReimb, /authorReimb do not have a navbar listing because 
+            they will be accessed within the viewReimb page */}
           </Switch>
           </div>
         </>
