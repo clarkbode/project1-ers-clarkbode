@@ -11,7 +11,7 @@ public interface ReimbursementService {
 	
 	List<Reimbursement> findAllByStatus(int status);
 	
-	int addReimbursement(User u, Reimbursement newReimb);
+	int addReimbursement(Reimbursement newReimb);
 	
 	void resolveReimbursement(int reimbId, int userId, int newStatusId);
 }

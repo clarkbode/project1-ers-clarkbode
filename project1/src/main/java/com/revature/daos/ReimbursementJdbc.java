@@ -23,7 +23,7 @@ public class ReimbursementJdbc implements ReimbursementDao {
 	private Logger log = Logger.getRootLogger(); // for some reason getRootLogger() doesn't exist
 
 	@Override
-	public int addReimbursement(User u, Reimbursement newReimb) { // QUESTION: In Blake's example, this returns int.
+	public int addReimbursement(Reimbursement newReimb) { // QUESTION: In Blake's example, this returns int.
 																	// Would it be better to return a reimbursement?
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO \"project-1\".ers_reimbursement(\r\n"
@@ -85,11 +85,7 @@ public class ReimbursementJdbc implements ReimbursementDao {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ers_reimbursement WHERE reimb_status_id = ? "); // SQL
 																														// statement
-																														// to
-																														// find
-																														// all
-																														// the
-																														// reimbursements
+
 			ps.setInt(1, status);
 			log.debug("finding user with the id " + status);
 
@@ -116,8 +112,8 @@ public class ReimbursementJdbc implements ReimbursementDao {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("UPDATE ers_reimbursement\r\n"
 					+ "SET reimb_status_id = ?, reimb_resolver = ?\r\n" + "WHERE reimb_id ="
-					+ reimbId); // is this correct? Check with Blake
-
+					+ reimbId); 
+			
 			ps.setInt(1, newStatusId);
 			ps.setInt(2, userId);
 

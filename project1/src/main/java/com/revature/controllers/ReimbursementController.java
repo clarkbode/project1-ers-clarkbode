@@ -89,26 +89,34 @@ public class ReimbursementController {
 	private void processPost(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonParseException, JsonMappingException, IOException {
 		String uri = req.getRequestURI();
-		String context = "LeagueOfLegendsApi";
+		String context = "project1";
 		uri = uri.substring(context.length() + 2, uri.length());
-		if (!"champions".equals(uri)) {
+		
+		if (!"reimbursements".equals(uri)) {
 			log.debug("could not recognize request with uri: " + uri);
 			resp.setStatus(404);
 			return;
 		} else {
-			String role = (String) req.getSession().getAttribute("role");
-			if (!"ADMIN".equals(role)) {
-				resp.setStatus(403);
-				return;
-			} else {
-				log.info("saving new reimbursement");
-				Reimbursement r = om.readValue(req.getReader(), Reimbursement.class);
-				// rs.AddReimbursement(r); (NEEDS TO BE IMPLEMENTED
-				resp.getWriter().write("" + r.getReimb_id());
-				resp.setStatus(201);
-				return;
-			}
+			log.info("saving new reimbursement");
+			Reimbursement r = om.readValue(req.getReader(), Reimbursement.class);
+			rs.addReimbursement(r); 
+			resp.getWriter().write("" + r.getReimb_id());
+			resp.setStatus(201);
+			return;
 		}
+//			String role = (String) req.getSession().getAttribute("role");
+//			if (!"ADMIN".equals(role)) {
+//				resp.setStatus(403);
+//				return;
+//			} else {
+//				log.info("saving new reimbursement");
+//				Reimbursement r = om.readValue(req.getReader(), Reimbursement.class);
+//				// rs.AddReimbursement(r); (NEEDS TO BE IMPLEMENTED
+//				resp.getWriter().write("" + r.getReimb_id());
+//				resp.setStatus(201);
+//				return;
+//			}
+//		}
 	}
 
 }

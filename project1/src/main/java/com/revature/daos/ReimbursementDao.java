@@ -8,7 +8,7 @@ import com.revature.model.User;
 public interface ReimbursementDao {
 	public static final  ReimbursementDao currentImplementation = new ReimbursementJdbc();
 	
-	int addReimbursement(User u, Reimbursement newReimb);
+	int addReimbursement(Reimbursement newReimb);
 	
 	void resolveReimbursement(int reimbId, int userId, int newStatusId);
 	

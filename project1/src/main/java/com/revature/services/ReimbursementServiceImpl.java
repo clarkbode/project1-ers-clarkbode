@@ -25,9 +25,9 @@ private ReimbursementDao rd = ReimbursementDao.currentImplementation;
 
 
 	@Override
-	public int addReimbursement(User u, Reimbursement newReimb) {
+	public int addReimbursement(Reimbursement newReimb) {
 		// TODO Auto-generated method stub
-		return rd.addReimbursement(u, newReimb);
+		return rd.addReimbursement(newReimb);
 	}
 
 
