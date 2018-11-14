@@ -27,22 +27,23 @@ public class ReimbursementJdbc implements ReimbursementDao {
 																	// Would it be better to return a reimbursement?
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO \"project-1\".ers_reimbursement(\r\n"
-					+ "	reimb_id, reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_receipt, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)\r\n"
-					+ "	VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?, ?);");
+					+ "	reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_receipt, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)\r\n"
+					+ "	VALUES (?, ?, ?, ?, ?, ?, NULL, ?, ?);");
 
-			ps.setInt(1, newReimb.getReimb_id());
-			ps.setDouble(2, newReimb.getReimb_amount());
-			ps.setTimestamp(3, newReimb.getReimb_submitted());
-			ps.setTimestamp(4, newReimb.getReimb_resolved());
-			ps.setString(5, newReimb.getReimb_description());
-			ps.setString(6, newReimb.getReimb_receipt());
-			ps.setInt(7, newReimb.getReimb_author());
+			//ps.setInt(1, (newReimb.getReimb_id() + 47)); //this will be removed once the data type is changed to serial
+			ps.setDouble(1, newReimb.getReimb_amount());
+			ps.setTimestamp(2, newReimb.getReimb_submitted());
+			ps.setTimestamp(3, newReimb.getReimb_resolved());
+			ps.setString(4, newReimb.getReimb_description());
+			ps.setString(5, newReimb.getReimb_receipt());
+			ps.setInt(6, newReimb.getReimb_author());
 			//ps.setInt(8, newReimb.getReimb_resolver());
-			ps.setInt(8, newReimb.getReimb_status_id());
-			ps.setInt(9, newReimb.getReimb_type_id());
+			ps.setInt(7, newReimb.getReimb_status_id());
+			ps.setInt(8, newReimb.getReimb_type_id());
 
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
+			System.out.println(ps);
 
 			if (rs.next()) {
 				int id = rs.getInt("reimb_id");

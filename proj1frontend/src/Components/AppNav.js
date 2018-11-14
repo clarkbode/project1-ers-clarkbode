@@ -22,11 +22,13 @@ export class AppNav extends React.Component {
               <li className="nav-item active">
                 <Link to="/sign-in" className="unset-anchor nav-link">Sign In</Link>
               </li>
-              <li className="nav-item active">
-                <Link to="/newReimb" className="unset-anchor nav-link">Create a New Reimbursement Request</Link>
-              </li>
-              <li classname="nav-item active">
-              <Link to="/viewReimb" className="unset-anchor nav-link">View Reimbursement Requests</Link>
+
+              <li className="nav-item active dropdown">
+              <div className="nav-link nav-item dropdown-toggle pointer" id="reimbs-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reimbursement Requests</div>
+              <div className="dropdown-menu" aria-labelledby="reimbs-dropdown">
+                <div className="dropdown-item"><Link to="/viewReimb" className="unset-anchor nav-link">View Reimbursement Requests</Link></div>
+                <div className="dropdown-item"><Link to="/newReimb" className="unset-anchor nav-link">Create a New Reimbursement Request</Link></div>
+              </div>
               </li>
               {/* <li className="nav-item active dropdown">
                 <div className="nav-link nav-item dropdown-toggle pointer" id="examples-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">League</div>

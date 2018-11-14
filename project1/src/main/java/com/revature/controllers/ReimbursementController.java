@@ -92,7 +92,7 @@ public class ReimbursementController {
 		String context = "project1";
 		uri = uri.substring(context.length() + 2, uri.length());
 		
-		if (!"reimbursements".equals(uri)) {
+		if (!"reimbursements/".equals(uri)) {
 			log.debug("could not recognize request with uri: " + uri);
 			resp.setStatus(404);
 			return;
