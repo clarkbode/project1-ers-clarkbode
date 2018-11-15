@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  post_build:
+    commands:
+      - cd \project-1-clarkbode && mvn clean package
+artifacts:
+  files:
+    - '**/*'
+  base-directory: '\project-1-clarkbode\project1\target'
