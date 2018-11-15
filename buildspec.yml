@@ -3,8 +3,8 @@ version: 0.2
 phases:
   post_build:
     commands:
-      - cd D:\Revature Training\project1 && mvn clean package
+      - cd \project1 && mvn clean package
 artifacts:
   files:
     - '**/*'
-  base-directory: 'project1-ers-clarkbode\project1\target'
+  base-directory: '\project1\target'
