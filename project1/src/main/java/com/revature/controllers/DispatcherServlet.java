@@ -37,6 +37,9 @@ public class DispatcherServlet extends HttpServlet {
 			uc.process(req, resp);
 		} else if (uri.startsWith("reimbursements")) {
 			rc.process(req, resp);
+		} else if (uri.startsWith("test")) {
+			resp.getWriter().write("test");
+			return;
 		} else {
 			resp.setStatus(404);
 		}
